@@ -40,7 +40,6 @@ malePositive = df[df["Gender"] == 1]["Gender"].count()
 maleDeath = df[(df["Gender"] == 1) & (df["Death"] == 1)]["Gender"].count()
 malemortality = round((maleDeath / malePositive) * 100,2)
 
-
 femalePositive = df[df["Gender"] == 2]["Gender"].count()
 femaleDeath = df[(df["Gender"] == 2) & (df["Death"] == 1)]["Gender"].count()
 femalemortality = round((femaleDeath / femalePositive) * 100,2)
@@ -49,7 +48,6 @@ gendermortality = 100-(femalemortality+malemortality)
 
 totalDeath = maleDeath + femaleDeath
 totalPositive = malePositive + femalePositive
-
 
 ageGroups = {}
 
@@ -69,7 +67,7 @@ for ageGroup in ageGroups:
     positiveCount = df[(df["Age group"] == ageGroup)]["Age group"].count()
     deathCount = df[(df["Age group"] == ageGroup) & (df["Death"] == 1)]["Age group"].count()
     ageMortality.append(round((deathCount / positiveCount) * 100, 2))
-    print(ageGroups[ageGroup], "Mortality", round((deathCount / positiveCount) * 100, 2), "%")
+    #print(ageGroups[ageGroup], "Mortality", round((deathCount / positiveCount) * 100, 2), "%")
 
 json_ageMortality = json.dumps(ageMortality)
 
@@ -84,12 +82,12 @@ regions[5] = "British Columbia"
 regionMortality = []
 
 for region in regions:
-    print()
+    #print()
     positiveCount = df[(df["Region"] == region)]["Region"].count()
-    print(regions[region], "Total Cases :", positiveCount)
+    #print(regions[region], "Total Cases :", positiveCount)
     deathCount = df[(df["Region"] == region) & (df["Death"] == 1)]["Region"].count()
     regionMortality.append(round((deathCount / positiveCount) * 100, 2))
-    print("Mortality", round((deathCount / positiveCount) * 100, 2), "%")
+    #print("Mortality", round((deathCount / positiveCount) * 100, 2), "%")
 
 json_regionMortality = json.dumps(regionMortality)
 
