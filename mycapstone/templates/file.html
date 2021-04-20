@@ -25,12 +25,17 @@
   <h3>Download Template to get Mortality </h3>
   <p>A navigation bar is a navigation header that is placed at the top of the page.</p>
   <a href={{url}}> <button href={{url}}>Sample Template</button> </a>
-  <form method="post" enctype="multipart/form-data">
-    <input type="file" name="myfile">
-    <button type="submit">Upload</button>
-  </form>
+  
+  <br/>
 
-  <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+  <div class="container" >
+    <form method="POST" action="/uplaod_csv" enctype="multipart/form-data">
+      {% csrf_token %}
+      Upload: <input name="csv_file" type="file"/>
+      <input type="submit" class="btn btn-success" value="Submit">
+    </form>
+  </div>
+  
 </div>
 
 </body>

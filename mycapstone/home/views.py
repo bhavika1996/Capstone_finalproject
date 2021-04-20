@@ -10,9 +10,27 @@ import csv
 import requests
 import json
 
+import io
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
 data = pd.read_csv('./home/COVID19.csv')
 count = data['Death'].count()
 df = pd.DataFrame(data)
+
+################# Regression ##########################################
+df_x = df[["Region", 'Gender', 'Age group', "Occupation"]]
+df_y = df['Death']
+
+train_x, unseen_test_x, train_y, unseen_test_y = train_test_split(df_x, df_y, test_size=0.05, random_state=42)
+train_x, test_x, train_y, test_y = train_test_split(train_x, train_y, test_size=0.25, random_state=42)
+
+reg = LinearRegression().fit(train_x, train_y)
+reg.score(train_x, train_y)
+reg.score(test_x, test_y)
+reg.score(unseen_test_x, unseen_test_y)
+
+#######################################################################
 
 totalPositive = len(data)
 totalDeath = df[df["Death"] == 1]["Death"].count()
@@ -115,8 +133,6 @@ def download_csv_template(request):
                     "Asymptomatic",	'Onset week of symptoms', "Onset year of symptoms",	"Hospital status", "Recovered",	"Recovery week", "Recovery year", "Death", "Transmission"])
     return response
 
-
-
 def file(request):
 
     download_url = "http://" + request.get_host() + "/download_csv_template"
@@ -126,3 +142,63 @@ def file(request):
     }
 
     return render(request, "file.html", context)
+
+def predict(request):
+
+    return render(request, "predict.html")
+
+def predict_post(request):
+    
+    age = float(request.GET.get("age_group", 0))
+    region = float(request.GET.get("region", 0))
+    occupation = float(request.GET.get("occupation", 0))
+    gender = float(request.GET    .get("gender", 0))
+
+    prediction = (reg.coef_[0] * region) + (reg.coef_[1] * gender) + (reg.coef_[2] * age) + (reg.coef_[3] * occupation) + reg.intercept_
+
+    msg = ''
+    if(abs(int(prediction)) == 2):
+        msg = 'Risk factor for given demographics is less'
+    elif(abs(int(prediction)) == 1):
+        msg = "Risk factor for given demographics is high"
+    else:
+        msg = "No Pridictable data is available for given demographic"
+
+    pred = abs(int(prediction))
+    context = {
+        "prediction": pred,
+        "msg": msg
+    }
+
+    return render(request, "predict_post.html", context)
+
+def uplaod_csv(request):
+
+    msg = ""
+    try:
+        csv_file = request.FILES["csv_file"]
+
+        if not csv_file.name.endswith('.csv'):
+            context ={
+            msg: "Upload a valid file"
+        }
+            return render(request, "csv_upload_review.html", context)
+        
+        data_set = io.StringIO(csv_file.read().decode('UTF-8'))
+
+        data = pd.read_csv(data_set,  delimiter=',')
+
+        msg = data["Death"].count()
+
+        context = {
+            
+            "msg": msg
+        }
+        return render(request, "csv_upload_review.html", context) 
+
+    except Exception as e:
+        context = {
+            msg: "Error"
+        }
+        print(e)
+        return render(request, "csv_upload_review.html", context)

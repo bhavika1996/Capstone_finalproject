@@ -1,0 +1,51 @@
+<html>
+
+<body>
+    <form action="/predict_post" method="get">
+        Gender:
+        <select name="gender" id="gender">
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+            <option value="9">Do not want share</option>
+        </select> <br />
+        
+        Age Group:
+        <select name="age_group" id="age_group">
+            <option value="1">0 to 19 Years</option>
+            <option value="2">20 to 29 Years</option>
+            <option value="3">30 to 39 Years</option>
+            <option value="4">40 to 49 Years</option>
+
+            <option value="5">50 to 59 Years</option>
+            <option value="6">60 to 69 Years</option>
+            <option value="7">70 to 79 Years</option>
+            <option value="8">80 Years or older</option>
+
+            <option value="9">Not Sure</option>
+        </select> <br />
+      	
+        Regin: 
+        <select name="region" id="region">
+            <option value="1">Atlantic (New Brunswick, Nova Scotia, Prince Edward Island, Newfoundland and Labrador)</option>
+            <option value="2">Quebec</option>
+            <option value="3">Ontario and Nunavut</option>
+            <option value="4">Prairies (Alberta, Saskatchewan, and Manitoba) and the Northwest Territories</option>
+            <option value="5">British Columbia and Yukon</option>
+            <option value="0">Not Sure</option>
+        </select> <br />
+
+        Occupation:
+        <select name="occupation" id="occupation">
+            <option value="1">Health care worker</option>
+            <option value="2">School or daycare worker/attendee</option>
+            <option value="3">Long term care resident</option>
+            <option value="4">Other</option>
+            <option value="9">Not Sure</option>
+        </select>
+        <br />
+
+        <input type="submit" />
+    </form>
+</body>
+
+</html>
