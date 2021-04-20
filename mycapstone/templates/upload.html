@@ -7,42 +7,70 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
     </head>
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="./">Mortality</a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="./">Home</a></li>
+              </ul>
+            </div>
+          </nav>
     <div id="container">
-        <canvas id="countries" width="500" height="400"></canvas>
+        <canvas id="regions" width="500" height="400"></canvas>
         <canvas id="death" width="500" height="400"></canvas>
     </div>
+    <canvas id="income" width="500" height="400"></canvas>
+    <script>  
     
-    <script>
-        //let data = {{male_death}};
-                // pie chart data
-                var pieData = [
-            {
-                value: {{male_death}},
-                color:"#878BB6"
-            },
-            {
-                value : {{female_death}},
-                color : "#4ACAB4"
-            },
-            {
-                value : {{totalDeath}},
-                color : "#FF8153"
-            }
-        ];
-        // pie chart options
-        var pieOptions = {
-             segmentShowStroke : false,
-             animateScale : true
+    
+    var barData = {
+            labels : ["January","February","March","April","May","June"],
+            datasets : [
+                {
+                    fillColor : "#48A497",
+                    strokeColor : "#48A4D1",
+                    data : [456,479,324,569,702,600]
+                },
+                {
+                    fillColor : "rgba(73,188,170,0.4)",
+                    strokeColor : "rgba(72,174,209,0.4)",
+                    data : [364,504,605,400,345,320]
+                }
+            ]
         }
-        // get pie chart canvas
-        var countries= document.getElementById("countries").getContext("2d");
-        // draw pie chart
-        new Chart(countries).Pie(pieData, pieOptions);
+        // get bar chart canvas
+        var income = document.getElementById("income").getContext("2d");
+        // draw bar chart
+        new Chart(income).Bar(barData);
+        var regions = ["Alantic", "Quebec", "Ontario & Nunavat", "Prairies", "British Columbia"];
 
+        var region_mortality = {{region_mortality| safe}};
+
+        var ctx = document.getElementById('regions').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: regions,
+                datasets: [{
+                    label: 'Mortality',
+                    data: region_mortality
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
 
 
         //graph-2
@@ -75,4 +103,5 @@
     {{loaded_data | safe}}
     <p>{{male_death | safe}}</p>
     <p>{{age | safe}}</p>
+    </body>
 </html>

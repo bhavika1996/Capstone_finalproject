@@ -6,6 +6,7 @@ from django.shortcuts import render
 import pandas as pd
 import csv
 import requests
+import json
 
 data = pd.read_csv('./home/COVID19.csv')
 count = data['Death'].count()
@@ -28,6 +29,47 @@ gendermortality = 100-(femalemortality+malemortality)
 
 totalDeath = maleDeath + femaleDeath
 totalPositive = malePositive + femalePositive
+
+
+# ageGroups = {}
+#
+# ageGroups[1] = "0 to 19 Years"
+# ageGroups[2] = "20 to 29 Years"
+# ageGroups[3] = "30 to 39 Years"
+# ageGroups[4] = "40 to 49 Years"
+#
+# ageGroups[5] = "50 to 59 Years"
+# ageGroups[6] = "60 to 69 Years"
+# ageGroups[7] = "70 to 79 Years"
+# ageGroups[8] = "80 to 89 Years"
+#
+# ageMortality = []
+#
+# for ageGroup in ageGroups:
+#     positiveCount = df[(df["Age group"] == ageGroup)]["Age group"].count()
+#     deathCount = df[(df["Age group"] == ageGroup) & (df["Death"] == 1)]["Age group"].count()
+#     ageMortality.append(round((deathCount / positiveCount) * 100, 2))
+#     print(ageGroups[ageGroup], "Mortality", round((deathCount / positiveCount) * 100, 2), "%")
+
+regions = {}
+
+regions[1] = "Alantic"
+regions[2] = "Quebec"
+regions[3] = "Ontario & Nunavat"
+regions[4] = "Prairies"
+regions[5] = "British Columbia"
+
+regionMortality = []
+
+for region in regions:
+    print()
+    positiveCount = df[(df["Region"] == region)]["Region"].count()
+    print(regions[region], "Total Cases :", positiveCount)
+    deathCount = df[(df["Region"] == region) & (df["Death"] == 1)]["Region"].count()
+    regionMortality.append(round((deathCount / positiveCount) * 100, 2))
+    print("Mortality", round((deathCount / positiveCount) * 100, 2), "%")
+
+json_regionMortality = json.dumps(regionMortality)
 
 # Create your views here.
 def home(request):
@@ -53,6 +95,8 @@ def upload(request):
         'male_positive':malePositive,
         'female_positive':femalePositive,
         'total_positive': totalPositive,
+        'region_mortality': json_regionMortality,
+
     }
 
     return render(request, "upload.html", context)
