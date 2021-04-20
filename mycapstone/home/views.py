@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 from django.shortcuts import render,HttpResponse
@@ -31,25 +33,27 @@ totalDeath = maleDeath + femaleDeath
 totalPositive = malePositive + femalePositive
 
 
-# ageGroups = {}
-#
-# ageGroups[1] = "0 to 19 Years"
-# ageGroups[2] = "20 to 29 Years"
-# ageGroups[3] = "30 to 39 Years"
-# ageGroups[4] = "40 to 49 Years"
-#
-# ageGroups[5] = "50 to 59 Years"
-# ageGroups[6] = "60 to 69 Years"
-# ageGroups[7] = "70 to 79 Years"
-# ageGroups[8] = "80 to 89 Years"
-#
-# ageMortality = []
-#
-# for ageGroup in ageGroups:
-#     positiveCount = df[(df["Age group"] == ageGroup)]["Age group"].count()
-#     deathCount = df[(df["Age group"] == ageGroup) & (df["Death"] == 1)]["Age group"].count()
-#     ageMortality.append(round((deathCount / positiveCount) * 100, 2))
-#     print(ageGroups[ageGroup], "Mortality", round((deathCount / positiveCount) * 100, 2), "%")
+ageGroups = {}
+
+ageGroups[1] = "0 to 19 Years"
+ageGroups[2] = "20 to 29 Years"
+ageGroups[3] = "30 to 39 Years"
+ageGroups[4] = "40 to 49 Years"
+
+ageGroups[5] = "50 to 59 Years"
+ageGroups[6] = "60 to 69 Years"
+ageGroups[7] = "70 to 79 Years"
+ageGroups[8] = "80 to 89 Years"
+
+ageMortality = []
+
+for ageGroup in ageGroups:
+    positiveCount = df[(df["Age group"] == ageGroup)]["Age group"].count()
+    deathCount = df[(df["Age group"] == ageGroup) & (df["Death"] == 1)]["Age group"].count()
+    ageMortality.append(round((deathCount / positiveCount) * 100, 2))
+    print(ageGroups[ageGroup], "Mortality", round((deathCount / positiveCount) * 100, 2), "%")
+
+json_ageMortality = json.dumps(ageMortality)
 
 regions = {}
 
@@ -96,10 +100,29 @@ def upload(request):
         'female_positive':femalePositive,
         'total_positive': totalPositive,
         'region_mortality': json_regionMortality,
-
+        'age_mortality': json_ageMortality
     }
 
     return render(request, "upload.html", context)
 
+def download_csv_template(request):
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="covid-template.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(["Case identifier number", "Region", "Episode week", "Episode week group", "Episode year", 'Gender', 'Age group', "Occupation",
+                    "Asymptomatic",	'Onset week of symptoms', "Onset year of symptoms",	"Hospital status", "Recovered",	"Recovery week", "Recovery year", "Death", "Transmission"])
+    return response
+
+
+
 def file(request):
-    return render(request, "file.html")
+
+    download_url = "http://" + request.get_host() + "/download_csv_template"
+    context = {
+
+        "url": download_url
+    }
+
+    return render(request, "file.html", context)

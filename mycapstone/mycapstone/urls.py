@@ -6,4 +6,5 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('upload', views.upload, name='upload'),
     path('file', views.file, name='file'),
+    path('download_csv_template', views.download_csv_template),
 ]
