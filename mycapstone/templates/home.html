@@ -1,0 +1,140 @@
+<html>
+<head>
+
+    <title>
+        Capstone
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+</head>
+<body >
+    <div style="background-color:black; color: rgb(185, 184, 184); text-align: center;">
+        <h1>Mortality Information</h1>
+        <p>Based on COVID-19</p>
+        <!-- <div class="cointainer"> -->
+        <img src="https://www.fredhutch.org/content/dam/www/homepage/formlette/2020-March/formlette-covid-19-desktop-3-2020.jpg" alt="Covid" style="width:100%">
+    </div>
+    <br>
+    <br>
+      <div class="col-sm-6 offset-md-1">
+          <h2 style="color:#3ba5ad">Canada COVID-19 Summary</h2>
+          </br>
+      </div>
+    <!-- current cases data -->
+    <div class="row">
+      <div class="col-sm-1">
+      </div>
+      <div class="col-sm-2">
+          <div class="card text-white bg-info mb-4">
+              <div class="card-body">
+                  <h5 class="card-title">Total Cases</h5>
+                  <p class="card-text">{{current_cases}}</p>
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-2">
+          <div class="card text-white bg-danger mb-4" >
+              <div class="card-body">
+                  <h5 class="card-title">Total Death</h5>
+                  <p class="card-text">{{fatalities}}</p>
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-2">
+          <div class="card text-white bg-warning mb-4">
+              <div class="card-body">
+                  <h5 class="card-title">Hospitalized</h5>
+                  <p class="card-text">{{hospitalized}}</p>
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="card text-white bg-success mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Recevored</h5>
+                <p class="card-text">{{recoveries}}</p>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="card text-white bg-secondary mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Vaccinated</h5>
+                <p class="card-text">{{vaccinated}}</p>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-1">
+      </div>
+    </div>
+
+    </br>
+    <div class="container" style="color:#3ba5ad">
+          <div class="card border-info mb-3" >
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="https://www.international.gc.ca/education/assets/images/ies-sei/19-137_Graph3_EN.png"
+                  class="card-img-top"
+                  alt="..."
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h4 class="card-title">Mortality in Canada</h4>
+                  <p class="card-text">Want to know the mortality in canada with various categories, represented by graphs. We used static dataset to represent mortality with various aspects. Some of the significant factors which can be determine to know the mortality rate of a human.</p>
+                  <p class="card-text"><small class="text-muted">All Representations are based on static dataset. Read more about the it.</small></p>
+                  <a href="upload" class="btn btn-info">Let's See</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card border-info mb-3" >
+            <div class="row no-gutters">
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h4 class="card-title">Download and Upload File</h4>
+                  <p class="card-text">Upload your own dataset in same representation. Also you can download the template for FREE. You would be able to get the visual outputs with the representation of GRAPHS.</p>
+                  <p class="card-text"><small class="text-muted">All Representations are based on static dataset. Read more about the it.</small></p>
+                  <a href="file" class="btn btn-info">Let's See</a>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <img src="https://safehomework.com/img/download.svg"
+                  class="card-img-top"
+                  alt="..."
+                />
+              </div>
+            </div>
+          </div>
+          <div class="card border-info mb-3" >
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="https://piwik.pro/wp-content/uploads/2020/10/2020-10-21_What-Is-PII-non-PII-and-personal-data_blog.png"
+                  class="card-img-top"
+                  alt="..."
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h4 class="card-title">Check Mortality with Personal Data</h4>
+                  <p class="card-text">You would be able to determine mortality by giving personal data.</p>
+                  <p class="card-text"><small class="text-muted">All Representations are based on static dataset. Read more about the it.</small></p>
+                  <a href="upload" class="btn btn-info">Let's See</a>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    <br>
+<footer>
+  copyrights reserverd by bhavika Patel
+</footer>
+    
+
+</body>
+</html>

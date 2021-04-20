@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title>
+            Capstone
+        </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    </head>
+    <div id="container">
+        <canvas id="countries" width="500" height="400"></canvas>
+        <canvas id="death" width="500" height="400"></canvas>
+    </div>
+    
+    <script>
+        //let data = {{male_death}};
+                // pie chart data
+                var pieData = [
+            {
+                value: {{male_death}},
+                color:"#878BB6"
+            },
+            {
+                value : {{female_death}},
+                color : "#4ACAB4"
+            },
+            {
+                value : {{totalDeath}},
+                color : "#FF8153"
+            }
+        ];
+        // pie chart options
+        var pieOptions = {
+             segmentShowStroke : false,
+             animateScale : true
+        }
+        // get pie chart canvas
+        var countries= document.getElementById("countries").getContext("2d");
+        // draw pie chart
+        new Chart(countries).Pie(pieData, pieOptions);
+
+
+
+        //graph-2
+
+        var pieData = [
+            {
+                value: {{male_positive}},
+                color:"#878BB6"
+            },
+            {
+                value : {{female_positive}},
+                color : "#4ACAB4"
+            },
+            {
+                value : {{total_positive}},
+                color : "#FF8153"
+            }
+        ];
+        // pie chart options
+        var pieOptions = {
+             segmentShowStroke : false,
+             animateScale : true
+        }
+        // get pie chart canvas
+        var countries= document.getElementById("death").getContext("2d");
+        // draw pie chart
+        new Chart(countries).Pie(pieData, pieOptions);
+
+    </script>
+    {{loaded_data | safe}}
+    <p>{{male_death | safe}}</p>
+    <p>{{age | safe}}</p>
+</html>
