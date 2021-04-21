@@ -8,164 +8,114 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>        
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js'></script>        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-              <div class="navbar-header">
-                <a class="navbar-brand" href="./">Mortality</a>
-              </div>
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="./">Home</a></li>
-              </ul>
-            </div>
-          </nav>
-    <div id="container">        
         
-    </div>
-    <canvas id="age" width="600" height="450"></canvas>
-    <canvas id="regions" width="400" height="400"></canvas>
-    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+    <canvas id="regionPie" style="float: left; width:100%; max-width: 720px; margin-top: 60px;"></canvas>
+    <canvas id="occupationDoughnut" style="float: left; width: 100%; max-width: 720px; margin-top: 60px;"></canvas>
+    <canvas id="ageBar" style="float: left; max-width: 100%; margin-top: 60px; padding: 0px 60px 60px 60px;"></canvas>
+    <canvas id="weekLine" style="float: left; max-width: 100%; margin-top: 60px; padding: 0px 60px 60px 60px;"></canvas>
     
     <script>  
     
         var regions = ["Alantic", "Quebec", "Ontario & Nunavat", "Prairies", "British Columbia"];
-        var region_mortality = {{ region_mortality|safe }};
-        alert(region_mortality);
+        var region_mortality = {{ region_mortality|safe }};        
 
-        var ageGroups = ["0 to 19 Years", "20 to 29 Years", "30 to 39 Years", "40 to 49 Years", "50 to 59 Years", "60 to 69 Years", "70 to 79 Years", "80 to 89 Years"];
+        var ageGroups = ["0 to 19 Years", "20 to 29 Years", "30 to 39 Years", "40 to 49 Years", "50 to 59 Years", "60 to 69 Years", "70 to 79 Years", "80 Years or older"];
         var age_mortality = {{ age_mortality|safe }};
-    
-        var barData = {
-                labels : ageGroups,
-                datasets : [
-                {
-                    fillColor : "#48A497",
-                    strokeColor : "#48A4D1",
-                    data : age_mortality
-                }                    
-            ]
-        }
-        // get bar chart canvas
-        var age = document.getElementById("age").getContext("2d");
-        // draw bar chart
-        new Chart(age).Bar(barData);
 
-
-        //graph-2
-
-        // var pieData = [
-        //     {
-        //         value: {{male_mortality}},
-        //         color : "#48A4D1"
-        //     },
-        //     {
-        //         value : {{female_positive}},
-        //         color : "#4ACAB4"
-        //     },
-        //     {
-        //         value : {{total_positive}},
-        //         color : "#FF8153"
-        //     }
-        // ];
-        // // pie chart options
-        // var pieOptions = {
-        //      segmentShowStroke : false,
-        //      animateScale : true
-        // }
-        // // get pie chart canvas
-        // var countries= document.getElementById("regions").getContext("2d");
-        // // draw pie chart
-        // new Chart(countries).Pie(pieData, pieOptions);
-
+        var occupation = ["Health care worker", "School or daycare worker/attendee", "Long term resident", "Other"];
+        var occupation_mortality = {{ occupation_mortality|safe }};
         
-        // var regions_Pie= document.getElementById("regions").getContext("2d");
-        // // draw pie chart
-        // new Chart(regions_Pie).Pie(config);
-
-        var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-        var yValues = [55, 49, 44, 24, 15];
-
-        new Chart("myChart", {
-        type: "bar",
-        data: {
-            labels: xValues,
-            datasets: [{
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 205, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(54, 162, 235, 0.2)'                
-                ],
-            data: yValues
-            }]
-        },
-        options: {
-            legend: {display: false},
-            title: {
-            display: true,
-            text: "World Wine Production 2018"
+        var week_death = {{ week_death|safe }};        
+        var week_confirmed = {{ week_confirmed|safe }};
+        var week = [];
+        for(var i=1; i <= 52; i++){
+            week.push(i);
+        }        
+        
+        var barColors = ["#f58742", "#42f548", "#42a4f5", "#ff4d4d", "#6699cc", "#ff4d94", "#2b5797", "#b91d47"]
+        
+        // Pie Chart
+        new Chart("regionPie", {
+            type: "pie",
+            data: {
+                labels: regions,
+                datasets: [{
+                   backgroundColor: barColors,
+                    data: region_mortality
+                }]
+            },
+            options: {
+                title: {
+                display: true,
+                text: "Provincial Mortality"
+                }
             }
-        }
+        });
+
+         // Bar Graph
+         new Chart("ageBar", {
+            type: "bar",
+            data: {
+                labels: ageGroups,
+                datasets: [{
+                   backgroundColor: barColors,
+                    data: age_mortality
+                }]
+            },
+            options: {
+                title: {
+                display: true,
+                text: "Age Groups' Mortality"
+                }
+            }
+        });
+
+        //Line Graph
+        new Chart("weekLine", {
+            type: "line",
+            data: {
+                labels: week,
+                datasets: [{ 
+                    data: week_confirmed,
+                    borderColor: "blue",
+                    fill: false
+                }, 
+                { 
+                    data: week_death,
+                    borderColor: "red",
+                    fill: false
+                }]
+            },
+            options: {
+                title: {
+                display: true,
+                text: "Confirmed Cases and Deaths per Week"
+                }
+            }
+        });
+
+        //Doughnut graph
+        new Chart("occupationDoughnut", {
+            type: "doughnut",
+            data: {
+                labels: occupation,
+                datasets: [{
+                   backgroundColor: barColors,
+                    data: occupation_mortality
+                }]
+            },
+            options: {
+                title: {
+                display: true,
+                text: "Occupation Mortality"
+                }
+            }
         });
 
         
-        
-        var data2 = {
-            labels: ["match1", "match2", "match3", "match4", "match5"],
-            datasets: [
-            {
-                label: "TeamB Score",
-                data: [20, 35, 40, 60, 50],
-                backgroundColor: [
-                    "#FAEBD7",
-                    "#DCDCDC",
-                    "#E9967A",
-                    "#F5DEB3",
-                    "#9ACD32"
-                ],
-                borderColor: [
-                    "#E9DAC6",
-                    "#CBCBCB",
-                    "#D88569",
-                    "#E4CDA2",
-                    "#89BC21"
-                ],
-                borderWidth: [1, 1, 1, 1, 1]
-            }
-            ]
-        };
-        var options = {
-            responsive: true,
-            title: {
-                display: true,                
-                text: "Pie Chart",
-                fontSize: 18,
-                fontColor: "#111"
-            },
-            legend: {
-                display: true,
-                position: "bottom",
-                labels: {
-                    fontColor: "#333",
-                    fontSize: 16
-                }
-            }
-        };
-
-        var regions_Pie = document.getElementById("regions").getContext("2d");
-        var chart2 = new Chart(regions_Pie, {
-            type: "pie",
-            data: data2,
-            options: options
-        });        
-
-
     </script>
-    {{loaded_data | safe}}
-    <p>{{male_death | safe}}</p>
-    <p>{{age | safe}}</p>
     </body>
 </html>
