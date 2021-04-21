@@ -49,13 +49,13 @@ gendermortality = 100-(femalemortality+malemortality)
 totalDeath = maleDeath + femaleDeath
 totalPositive = malePositive + femalePositive
 
-ageGroups = {}
 
+#Age Group Mortality
+ageGroups = {}
 ageGroups[1] = "0 to 19 Years"
 ageGroups[2] = "20 to 29 Years"
 ageGroups[3] = "30 to 39 Years"
 ageGroups[4] = "40 to 49 Years"
-
 ageGroups[5] = "50 to 59 Years"
 ageGroups[6] = "60 to 69 Years"
 ageGroups[7] = "70 to 79 Years"
@@ -66,13 +66,13 @@ ageMortality = []
 for ageGroup in ageGroups:
     positiveCount = df[(df["Age group"] == ageGroup)]["Age group"].count()
     deathCount = df[(df["Age group"] == ageGroup) & (df["Death"] == 1)]["Age group"].count()
-    ageMortality.append(round((deathCount / positiveCount) * 100, 2))
-    #print(ageGroups[ageGroup], "Mortality", round((deathCount / positiveCount) * 100, 2), "%")
+    ageMortality.append(round((deathCount / positiveCount) * 100, 2))    
 
 json_ageMortality = json.dumps(ageMortality)
 
-regions = {}
 
+#Region Mortality
+regions = {}
 regions[1] = "Alantic"
 regions[2] = "Quebec"
 regions[3] = "Ontario & Nunavat"
@@ -82,14 +82,43 @@ regions[5] = "British Columbia"
 regionMortality = []
 
 for region in regions:
-    #print()
-    positiveCount = df[(df["Region"] == region)]["Region"].count()
-    #print(regions[region], "Total Cases :", positiveCount)
+    positiveCount = df[(df["Region"] == region)]["Region"].count()    
     deathCount = df[(df["Region"] == region) & (df["Death"] == 1)]["Region"].count()
-    regionMortality.append(round((deathCount / positiveCount) * 100, 2))
-    #print("Mortality", round((deathCount / positiveCount) * 100, 2), "%")
+    regionMortality.append(round((deathCount / positiveCount) * 100, 2))    
 
 json_regionMortality = json.dumps(regionMortality)
+
+
+#Occupation Mortality
+occupations = {}
+occupations[1] = "Health care worker"
+occupations[2] = "School or daycare worker/attendee"
+occupations[3] = "Long term care resident"
+occupations[4] = "Other"
+occupationMortality = []
+
+for occupation in occupations:
+    positiveCount = df[(df["Occupation"] == occupation)]["Occupation"].count()
+    deathCount = df[(df["Occupation"] == occupation) & (df["Death"] == 1)]["Occupation"].count()
+    occupationMortality.append(round((deathCount / positiveCount) * 100, 2))
+
+json_occupationMortality = json.dumps(occupationMortality)
+
+
+#As per week
+weekList = range(1, 53)
+weekConfirmed = []
+weekDeath = []
+
+for i in weekList:
+    weekPositiveCount = df[(df["Episode week"] == i) & (df["Episode year"] == 20)]["Episode week"].count()
+    weekConfirmed.append(weekPositiveCount)
+    weekDeathCount = df[(df["Episode week"] == i) & (df["Episode year"] == 20) & (df["Death"] == 1)]["Episode week"].count()
+    weekDeath.append(weekDeathCount)
+
+# json_weekConfirmed = json.dumps(weekConfirmed)
+# json_weekDeath = json.dumps(weekDeath)
+
 
 # Create your views here.
 def home(request):
@@ -116,7 +145,10 @@ def upload(request):
         'female_positive':femalePositive,
         'total_positive': totalPositive,
         'region_mortality': json_regionMortality,
-        'age_mortality': json_ageMortality
+        'age_mortality': json_ageMortality,
+        'occupation_mortality': json_occupationMortality,
+        'week_death': weekDeath,
+        'week_confirmed': weekConfirmed
     }
 
     return render(request, "upload.html", context)
