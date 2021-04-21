@@ -13,9 +13,10 @@
     <body>
         
     <canvas id="regionPie" style="float: left; width:100%; max-width: 720px; margin-top: 60px;"></canvas>
-    <canvas id="occupationDoughnut" style="float: left; width: 100%; max-width: 720px; margin-top: 60px;"></canvas>
-    <canvas id="ageBar" style="float: left; max-width: 100%; margin-top: 60px; padding: 0px 60px 60px 60px;"></canvas>
-    <canvas id="weekLine" style="float: left; max-width: 100%; margin-top: 60px; padding: 0px 60px 60px 60px;"></canvas>
+    <canvas id="genderBar" style="float: left; width:100%; max-width: 720px; margin-top: 60px;"></canvas>    
+    <canvas id="ageBar" style="float: left; width:100%; max-width: 720px; margin-top: 60px;"></canvas>
+    <canvas id="occupationDoughnut" style="float: left; width: 100%; max-width: 720px; margin-top: 60px;"></canvas>    
+    
     
     <script>  
     
@@ -28,12 +29,8 @@
         var occupation = ["Health care worker", "School or daycare worker/attendee", "Long term resident", "Other"];
         var occupation_mortality = {{ occupation_mortality|safe }};
         
-        var week_death = {{ week_death|safe }};        
-        var week_confirmed = {{ week_confirmed|safe }};
-        var week = [];
-        for(var i=1; i <= 52; i++){
-            week.push(i);
-        }        
+        var male_mortality = {{ male_mortality|safe }};
+        var female_mortality = {{ female_mortality|safe }};        
         
         var barColors = ["#f58742", "#42f548", "#42a4f5", "#ff4d4d", "#6699cc", "#ff4d94", "#2b5797", "#b91d47"]
         
@@ -55,7 +52,7 @@
             }
         });
 
-         // Bar Graph
+         // Bar Graph         
          new Chart("ageBar", {
             type: "bar",
             data: {
@@ -69,30 +66,35 @@
                 title: {
                 display: true,
                 text: "Age Groups' Mortality"
+                },
+                legend: {
+                    display: false
                 }
             }
         });
 
-        //Line Graph
-        new Chart("weekLine", {
-            type: "line",
+        //Bar Chart
+        new Chart("genderBar", {
+            type: "bar",
             data: {
-                labels: week,
-                datasets: [{ 
-                    data: week_confirmed,
-                    borderColor: "blue",
-                    fill: false
-                }, 
-                { 
-                    data: week_death,
-                    borderColor: "red",
-                    fill: false
+                labels: ["Male", "Female", "Other"],
+                datasets: [{
+                   backgroundColor: barColors,
+                    data: [male_mortality, female_mortality, 0]
                 }]
             },
-            options: {
+            options: {                
                 title: {
                 display: true,
-                text: "Confirmed Cases and Deaths per Week"
+                text: "Gender Mortality"
+                },
+                scales: {
+                    xAxes: [{
+                        maxBarThickness: 80,
+                    }]
+                },
+                legend: {
+                    display: false
                 }
             }
         });
