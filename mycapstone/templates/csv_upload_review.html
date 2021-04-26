@@ -1,1 +1,123 @@
-<p>{{msg}}</p>
+<html>
+    <head>
+        <title>
+            Capstone
+        </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    </head>
+    <body>
+        
+    <canvas id="regionPie" style="float: left; width:100%; max-width: 720px; margin-top: 60px;"></canvas>
+    <canvas id="genderBar" style="float: left; width:100%; max-width: 720px; margin-top: 60px;"></canvas>    
+    <canvas id="ageBar" style="float: left; width:100%; max-width: 720px; margin-top: 60px;"></canvas>
+    <canvas id="occupationDoughnut" style="float: left; width: 100%; max-width: 720px; margin-top: 60px;"></canvas>    
+    
+    
+    <script>  
+    
+        var regions = ["Alantic", "Quebec", "Ontario & Nunavat", "Prairies", "British Columbia"];
+        var region_mortality = {{ region_mortality|safe }};        
+
+        var ageGroups = ["0 to 19 Years", "20 to 29 Years", "30 to 39 Years", "40 to 49 Years", "50 to 59 Years", "60 to 69 Years", "70 to 79 Years", "80 Years or older"];
+        var age_mortality = {{ age_mortality|safe }};
+
+        var occupation = ["Health care worker", "School or daycare worker/attendee", "Long term resident", "Other"];
+        var occupation_mortality = {{ occupation_mortality|safe }};
+        
+        var male_mortality = {{ male_mortality|safe }};
+        var female_mortality = {{ female_mortality|safe }};        
+        
+        var barColors = ["#f58742", "#42f548", "#42a4f5", "#ff4d4d", "#6699cc", "#ff4d94", "#2b5797", "#b91d47"];
+        
+        // Pie Chart
+        new Chart("regionPie", {
+            type: "pie",
+            data: {
+                labels: regions,
+                datasets: [{
+                   backgroundColor: barColors,
+                    data: region_mortality
+                }]
+            },
+            options: {
+                title: {
+                display: true,
+                text: "Provincial Mortality"
+                }
+            }
+        });
+
+         // Bar Graph         
+         new Chart("ageBar", {
+            type: "bar",
+            data: {
+                labels: ageGroups,
+                datasets: [{
+                   backgroundColor: barColors,
+                    data: age_mortality
+                }]
+            },
+            options: {
+                title: {
+                display: true,
+                text: "Age Groups' Mortality"
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
+
+        //Bar Chart
+        new Chart("genderBar", {
+            type: "bar",
+            data: {
+                labels: ["Male", "Female", "Other"],
+                datasets: [{
+                   backgroundColor: barColors,
+                    data: [male_mortality, female_mortality, 0]
+                }]
+            },
+            options: {                
+                title: {
+                display: true,
+                text: "Gender Mortality"
+                },
+                scales: {
+                    xAxes: [{
+                        maxBarThickness: 80,
+                    }]
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
+
+        //Doughnut graph
+        new Chart("occupationDoughnut", {
+            type: "doughnut",
+            data: {
+                labels: occupation,
+                datasets: [{
+                   backgroundColor: barColors,
+                    data: occupation_mortality
+                }]
+            },
+            options: {
+                title: {
+                display: true,
+                text: "Occupation Mortality"
+                }
+            }
+        });
+
+        
+    </script>
+    </body>
+</html>
