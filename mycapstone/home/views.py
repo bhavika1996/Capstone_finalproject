@@ -36,88 +36,88 @@ totalPositive = len(data)
 totalDeath = df[df["Death"] == 1]["Death"].count()
 totalMortality = round((totalDeath / totalPositive) * 100, 2)
 
-malePositive = df[df["Gender"] == 1]["Gender"].count()
-maleDeath = df[(df["Gender"] == 1) & (df["Death"] == 1)]["Gender"].count()
-malemortality = round((maleDeath / malePositive) * 100,2)
+#Male Mortality
+def maleData(data = pd.read_csv('./home/COVID19.csv')):
+    df = pd.DataFrame(data)
+    malePositive = df[df["Gender"] == 1]["Gender"].count()
+    maleDeath = df[(df["Gender"] == 1) & (df["Death"] == 1)]["Gender"].count()
+    malemortality = round((maleDeath / malePositive) * 100,2)
 
-femalePositive = df[df["Gender"] == 2]["Gender"].count()
-femaleDeath = df[(df["Gender"] == 2) & (df["Death"] == 1)]["Gender"].count()
-femalemortality = round((femaleDeath / femalePositive) * 100,2)
+    return malemortality
 
-gendermortality = 100-(femalemortality+malemortality)
+#Female Mortality
+def femaleData(data = pd.read_csv('./home/COVID19.csv')):
+    df = pd.DataFrame(data)
+    femalePositive = df[df["Gender"] == 2]["Gender"].count()
+    femaleDeath = df[(df["Gender"] == 2) & (df["Death"] == 1)]["Gender"].count()
+    femalemortality = round((femaleDeath / femalePositive) * 100,2)
 
-totalDeath = maleDeath + femaleDeath
-totalPositive = malePositive + femalePositive
-
+    return femalemortality
+    
 
 #Age Group Mortality
-ageGroups = {}
-ageGroups[1] = "0 to 19 Years"
-ageGroups[2] = "20 to 29 Years"
-ageGroups[3] = "30 to 39 Years"
-ageGroups[4] = "40 to 49 Years"
-ageGroups[5] = "50 to 59 Years"
-ageGroups[6] = "60 to 69 Years"
-ageGroups[7] = "70 to 79 Years"
-ageGroups[8] = "80 to 89 Years"
+def ageGroupData(data = pd.read_csv('./home/COVID19.csv')):
+    df = pd.DataFrame(data)
+    ageGroups = {}
+    ageGroups[1] = "0 to 19 Years"
+    ageGroups[2] = "20 to 29 Years"
+    ageGroups[3] = "30 to 39 Years"
+    ageGroups[4] = "40 to 49 Years"
+    ageGroups[5] = "50 to 59 Years"
+    ageGroups[6] = "60 to 69 Years"
+    ageGroups[7] = "70 to 79 Years"
+    ageGroups[8] = "80 to 89 Years"
 
-ageMortality = []
+    ageMortality = []
 
-for ageGroup in ageGroups:
-    positiveCount = df[(df["Age group"] == ageGroup)]["Age group"].count()
-    deathCount = df[(df["Age group"] == ageGroup) & (df["Death"] == 1)]["Age group"].count()
-    ageMortality.append(round((deathCount / positiveCount) * 100, 2))    
+    for ageGroup in ageGroups:
+        positiveCount = df[(df["Age group"] == ageGroup)]["Age group"].count()
+        deathCount = df[(df["Age group"] == ageGroup) & (df["Death"] == 1)]["Age group"].count()
+        ageMortality.append(round((deathCount / positiveCount) * 100, 2))    
 
-json_ageMortality = json.dumps(ageMortality)
+    json_ageMortality = json.dumps(ageMortality)
+    return json_ageMortality
 
 
 #Region Mortality
-regions = {}
-regions[1] = "Alantic"
-regions[2] = "Quebec"
-regions[3] = "Ontario & Nunavat"
-regions[4] = "Prairies"
-regions[5] = "British Columbia"
+def regionData(data = pd.read_csv('./home/COVID19.csv')):
+    df = pd.DataFrame(data)
+    regions = {}
+    regions[1] = "Alantic"
+    regions[2] = "Quebec"
+    regions[3] = "Ontario & Nunavat"
+    regions[4] = "Prairies"
+    regions[5] = "British Columbia"
 
-regionMortality = []
+    regionMortality = []
 
-for region in regions:
-    positiveCount = df[(df["Region"] == region)]["Region"].count()    
-    deathCount = df[(df["Region"] == region) & (df["Death"] == 1)]["Region"].count()
-    regionMortality.append(round((deathCount / positiveCount) * 100, 2))    
+    for region in regions:
+        positiveCount = df[(df["Region"] == region)]["Region"].count()    
+        deathCount = df[(df["Region"] == region) & (df["Death"] == 1)]["Region"].count()
+        regionMortality.append(round((deathCount / positiveCount) * 100, 2))    
 
-json_regionMortality = json.dumps(regionMortality)
+    json_regionMortality = json.dumps(regionMortality)
+
+    return json_regionMortality
 
 
 #Occupation Mortality
-occupations = {}
-occupations[1] = "Health care worker"
-occupations[2] = "School or daycare worker/attendee"
-occupations[3] = "Long term care resident"
-occupations[4] = "Other"
-occupationMortality = []
+def occupationData(data = pd.read_csv('./home/COVID19.csv')):
+    df = pd.DataFrame(data)
+    occupations = {}
+    occupations[1] = "Health care worker"
+    occupations[2] = "School or daycare worker/attendee"
+    occupations[3] = "Long term care resident"
+    occupations[4] = "Other"
+    occupationMortality = []
 
-for occupation in occupations:
-    positiveCount = df[(df["Occupation"] == occupation)]["Occupation"].count()
-    deathCount = df[(df["Occupation"] == occupation) & (df["Death"] == 1)]["Occupation"].count()
-    occupationMortality.append(round((deathCount / positiveCount) * 100, 2))
+    for occupation in occupations:
+        positiveCount = df[(df["Occupation"] == occupation)]["Occupation"].count()
+        deathCount = df[(df["Occupation"] == occupation) & (df["Death"] == 1)]["Occupation"].count()
+        occupationMortality.append(round((deathCount / positiveCount) * 100, 2))
 
-json_occupationMortality = json.dumps(occupationMortality)
-
-
-#As per week
-weekList = range(1, 53)
-weekConfirmed = []
-weekDeath = []
-
-for i in weekList:
-    weekPositiveCount = df[(df["Episode week"] == i) & (df["Episode year"] == 20)]["Episode week"].count()
-    weekConfirmed.append(weekPositiveCount)
-    weekDeathCount = df[(df["Episode week"] == i) & (df["Episode year"] == 20) & (df["Death"] == 1)]["Episode week"].count()
-    weekDeath.append(weekDeathCount)
-
-# json_weekConfirmed = json.dumps(weekConfirmed)
-# json_weekDeath = json.dumps(weekDeath)
+    json_occupationMortality = json.dumps(occupationMortality)
+    return json_occupationMortality
 
 
 # Create your views here.
@@ -135,20 +135,18 @@ def home(request):
     return render(request, 'home.html', context)
 
 def upload(request):
+    malemortality = maleData()
+    femalemortality = femaleData()
+    json_regionMortality = regionData()
+    json_ageMortality = ageGroupData()
+    json_occupationMortality = occupationData()
+    
     context = {
-        'loaded_data': count,
-        'male_death': malemortality,
-        'female_death':femalemortality,
-        'totalDeath': totalMortality,
-        'gender_death':gendermortality,
-        'male_positive':malePositive,
-        'female_positive':femalePositive,
-        'total_positive': totalPositive,
+        'male_mortality': malemortality,
+        'female_mortality': femalemortality,
         'region_mortality': json_regionMortality,
         'age_mortality': json_ageMortality,
-        'occupation_mortality': json_occupationMortality,
-        'week_death': weekDeath,
-        'week_confirmed': weekConfirmed
+        'occupation_mortality': json_occupationMortality        
     }
 
     return render(request, "upload.html", context)
@@ -210,19 +208,29 @@ def uplaod_csv(request):
 
         if not csv_file.name.endswith('.csv'):
             context ={
-            msg: "Upload a valid file"
-        }
+                msg: "Upload a valid file"
+            }
             return render(request, "csv_upload_review.html", context)
         
         data_set = io.StringIO(csv_file.read().decode('UTF-8'))
 
         data = pd.read_csv(data_set,  delimiter=',')
 
-        msg = data["Death"].count()
+        # msg = data["Death"].count()
+        # df = pd.DataFrame(data)
 
-        context = {
-            
-            "msg": msg
+        malemortality = maleData(data)
+        femalemortality = femaleData(data)
+        json_regionMortality = regionData(data)
+        json_ageMortality = ageGroupData(data)
+        json_occupationMortality = occupationData(data)
+
+        context = {            
+            'male_mortality': malemortality,
+            'female_mortality': femalemortality,
+            'region_mortality': json_regionMortality,
+            'age_mortality': json_ageMortality,
+            'occupation_mortality': json_occupationMortality                        
         }
         return render(request, "csv_upload_review.html", context) 
 
