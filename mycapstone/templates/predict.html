@@ -1,76 +1,144 @@
 <html>
-    <head>
-        <title>File Upload</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-      </head>
-    <style>
-      body{
-        background-image: url("https://cutewallpaper.org/21/blurred-background-hd/4K-Plain-Blurred-Background-Best-HD-Wallpaper-40957-Baltana.jpg");
-        background-repeat: no-repeat;
-      }
-      .jumbotron{
-        font-family: 'Times New Roman', Times, serif;
-      }
-    </style>
-<body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="./">Mortality</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="./">Home</a></li>
-    </ul>
-  </div>
-</nav>
-<div class="container">
-  <div class="jumbotron">
-    <h1>Wanna know something Interesting?</h1>
-    <small>Enter your personal data</small>
-    <form action="/predict_post" method="get">
-    <h4>" If I am a <select name="gender" id="gender">
-      <option value="1">Male</option>
-      <option value="2">Female</option>
-      <option value="9">Do not want share</option>
-      </select>, And I belong within the age group of
-      <select name="age_group" id="age_group">
-        <option value="1">0 to 19 Years</option>
-        <option value="2">20 to 29 Years</option>
-        <option value="3">30 to 39 Years</option>
-        <option value="4">40 to 49 Years</option>
-        <option value="5">50 to 59 Years</option>
-        <option value="6">60 to 69 Years</option>
-        <option value="7">70 to 79 Years</option>
-        <option value="8">80 Years or older</option>
-        <option value="9">Not Sure</option>
-      </select>. Also, I reside in the region of
-      <select name="region" id="region">
-        <option value="1">Atlantic (New Brunswick, Nova Scotia, Prince Edward Island, Newfoundland and Labrador)</option>
-        <option value="2">Quebec</option>
-        <option value="3">Ontario and Nunavut</option>
-        <option value="4">Prairies (Alberta, Saskatchewan, and Manitoba) and the Northwest Territories</option>
-        <option value="5">British Columbia and Yukon</option>
-        <option value="0">Not Sure</option>
-      </select> and I am a
-      <select name="occupation" id="occupation">
-        <option value="1">Health care worker</option>
-        <option value="2">School or daycare worker/attendee</option>
-        <option value="3">Long term care resident</option>
-        <option value="4">Other</option>
-        <option value="9">Not Sure</option>
-      </select>". Then, how much would be my risk factor ? <br><br>Let's Calculate <input type="submit" />
-    </h4>
-    </form>
 
-    <br>
+<head>
+  <title>File Upload</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+</head>
+<style>
+  body {
+    background-image: url("https://cutewallpaper.org/21/blurred-background-hd/4K-Plain-Blurred-Background-Best-HD-Wallpaper-40957-Baltana.jpg");
+    background-repeat: no-repeat;
+  }
+
+  .jumbotron {
+    font-family: 'Times New Roman', Times, serif;
+    padding-top: 30px;
+  }
+</style>
+<script>
+
+
+
+  $(document).ready(() => {
+
+    $('#age_group').dropdown();
+
+    $('#predictBtn').click(function (e) {
+
+      $('#predictBtn').attr('disabled', 'disabled');
+      $("#results").attr("style", "display:none")
+
+      e.preventDefault();
+
+      const gender = $('#gender').val();
+      const age = $('#age_group').val();
+      const region = $('#region').val();
+      const occupation = $('#occupation').val();
+
+      const body = {
+
+        gender, age, region, occupation
+      }
+      const url = `/predict_post?age=${age}&gender=${gender}&region=${region}&occupation=${occupation}`;
+      $.ajax({
+        url: url,
+        'type': 'GET',
+        // 'contentType': 'application/json',
+        // 'dataType': 'json',
+        // body: JSON.stringify(body),
+        success: function (result) {
+
+          $("#results").removeClass('badge-success');
+          $("#results").removeClass('badge-warning');
+          $("#results").removeClass('badge-primary');
+
+          if (result.prediction === 2) {
+
+            $("#results").addClass('badge-success');
+          }
+          else if (result.prediction === 1) {
+
+            $("#results").addClass('badge-danger');
+          }
+          else {
+            $("#results").addClass('badge-primary');
+          }
+
+          $("#results").html(result.msg);
+          $("#results").attr("style", "display:block");
+          $('#predictBtn').attr('disabled', false);
+        }
+      });
+
+    });
+  });
+</script>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container justify-content-start">
+        <a class="navbar-brand" href="./">Mortality</a>
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a  class="nav-link" href="./">Home</a>
+          </li>
+        </ul>
+    </div>
+  </nav>
+  <br>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Wanna know something Interesting?</h1>
+      <small>Enter your personal data</small>
+      <form>
+        <h4>" If I am a &nbsp; <select name="gender" id="gender">
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+            <option value="9">Do not want share</option>
+          </select>, &nbsp; And I belong within the age group of
+          <select name="age_group" id="age_group">
+            <option value="1">0 to 19 Years</option>
+            <option value="2">20 to 29 Years</option>
+            <option value="3">30 to 39 Years</option>
+            <option value="4">40 to 49 Years</option>
+            <option value="5">50 to 59 Years</option>
+            <option value="6">60 to 69 Years</option>
+            <option value="7">70 to 79 Years</option>
+            <option value="8">80 Years or older</option>
+            <option value="9">Not Sure</option>
+          </select>. &nbsp; Also, I reside in the region of
+          <select name="region" id="region">
+            <option value="1"> &nbsp; Atlantic (New Brunswick, Nova Scotia, Prince Edward Island, Newfoundland and
+              Labrador)
+            </option>
+            <option value="2">Quebec</option>
+            <option value="3">Ontario and Nunavut</option>
+            <option value="4">Prairies (Alberta, Saskatchewan, and Manitoba) and the Northwest Territories</option>
+            <option value="5">British Columbia and Yukon</option>
+            <option value="0">Not Sure</option>
+          </select> &nbsp; and I am a
+          <select name="occupation" id="occupation">
+            <option value="1">Health care worker</option>
+            <option value="2">School or daycare worker/attendee</option>
+            <option value="3">Long term care resident</option>
+            <option value="4">Other</option>
+            <option value="9">Not Sure</option>
+          </select>". &nbsp; Then, how much would be my risk factor ? <br><br> <input class="btn btn-info"
+            id="predictBtn" type="button" value="Let's Calculate" />
+        </h4>
+      </form>
+      <span class="badge badge-pill" id="results" style="display: none;"></span>
+      <br>
+    </div>
   </div>
-</div>
-    
-      <!-- Gender:
+
+  <!-- Gender:
       <select name="gender" id="gender">
           <option value="1">Male</option>
           <option value="2">Female</option>
@@ -113,7 +181,7 @@
     <br /> -->
   <!-- <input type="submit" />
   </form> -->
-  
+
 
 
 

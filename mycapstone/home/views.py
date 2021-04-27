@@ -177,10 +177,15 @@ def predict(request):
 
 def predict_post(request):
     
-    age = float(request.GET.get("age_group", 0))
+    age = float(request.GET.get("age", 0))
     region = float(request.GET.get("region", 0))
     occupation = float(request.GET.get("occupation", 0))
     gender = float(request.GET    .get("gender", 0))
+
+    # age = float(request.POST.get("age_group", 0))
+    # region = float(request.POST.get("region", 0))
+    # occupation = float(request.POST.get("occupation", 0))
+    # gender = float(request.POST.get("gender", 0))
 
     prediction = (reg.coef_[0] * region) + (reg.coef_[1] * gender) + (reg.coef_[2] * age) + (reg.coef_[3] * occupation) + reg.intercept_
 
@@ -193,12 +198,13 @@ def predict_post(request):
         msg = "No Pridictable data is available for given demographic"
 
     pred = abs(int(prediction))
+    
     context = {
         "prediction": pred,
         "msg": msg
     }
 
-    return render(request, "predict_post.html", context)
+    return HttpResponse(json.dumps(context), content_type="application/json")
 
 def uplaod_csv(request):
 
