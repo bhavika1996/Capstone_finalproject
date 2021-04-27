@@ -8,6 +8,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+<style>
+  form{
+    display: inline-grid;
+}
+</style>
 <body>
 
 <nav class="navbar navbar-inverse">
@@ -21,21 +26,19 @@
   </div>
 </nav>
   
-<div class="container" >
-  <h3>Download Template to get Mortality </h3>
-  <p>A navigation bar is a navigation header that is placed at the top of the page.</p>
-  <a href={{url}}> <button href={{url}}>Sample Template</button> </a>
-  
-  <br/>
-
-  <div class="container" >
+<div class="container text-center">
+  <h2>Want To Know Mortality with your Dataset ?</h2>
+  <h3>Download Template to get Mortality</h3><br>
+  <a href={{url}}> <button type="button" class="btn btn-success" href={{url}}>Sample Template</button> </a>
+  <br>
+  <br>
+  <div class="container text-center">
     <form method="POST" action="/uplaod_csv" enctype="multipart/form-data">
       {% csrf_token %}
-      Upload: <input name="csv_file" type="file"/>
-      <input type="submit" class="btn btn-success" value="Submit">
+      <h3>Upload: </h3><input name="csv_file" type="file"/>
+      <input type="submit" class="btn btn-success text-center" value="Submit">
     </form>
-  </div>
-  
+  </div>  
 </div>
 
 </body>

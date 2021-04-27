@@ -1,3 +1,4 @@
+{% load static %}
 <html>
 <head>
 
@@ -11,9 +12,43 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    <!-- <link rel="stylesheet" type="text/css" href="{% static ''%}"> -->
+    <style>
+      a{
+        color: black;
+      }
+      #title{
+        background-color:black;
+        color: rgb(185, 184, 184);
+        text-align: center;
+      }
+      h2,footer{
+        color:#3ba5ad
+      }
+      .btn{
+        background-color: #3ba5ad;
+      }
+      .container{
+        color:#3ba5ad
+      }
+      .card-deck .card{
+        padding: 40px;
+        border: none;
+      }
+      input[type=text], select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
+    }
+    </style>
 </head>
 <body >
-    <div style="background-color:black; color: rgb(185, 184, 184); text-align: center;">
+    <div id="title">
         <h1>Mortality Information</h1>
         <p>Based on COVID-19 Data</p>
         <!-- <div class="cointainer"> -->
@@ -22,7 +57,7 @@
     <br>
     <br>
       <div class="col-sm-6 offset-md-1">
-          <h2 style="color:#3ba5ad">Canadian COVID-19 Data Analysis</h2>
+          <h2>Canadian COVID-19 Data Analysis</h2>
           </br>
       </div>
     <!-- current cases data -->
@@ -74,7 +109,7 @@
     </div>
 
     </br>
-    <div class="container" style="color:#3ba5ad">
+    <div class="container">
           <div class="card border-info mb-3" >
             <div class="row no-gutters">
               <div class="col-md-4">
@@ -131,10 +166,69 @@
         </div>
       </div>
     <br>
+
+
+<!-- About Us-->
+
+<div class="container">
+  <div style="text-align: center;">
+    <h2 >About Us</h2>
+    </br>
+  </div>
+  <div class="card-deck text-center">
+    <div class="card">
+      <img class="card-img-top rounded-circle" src="https://media-exp1.licdn.com/dms/image/C4D03AQGlN0DpaRrhLA/profile-displayphoto-shrink_800_800/0/1611096723940?e=1625097600&v=beta&t=c_YT5gHlcacT_8GFFF90F9-bBOz0BYHFzZ168h-zyBI" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Bhavika Patel</h5>
+        <a class="card-text" href="https://www.linkedin.com/in/bhavika-patel85/">Web Designer</a>
+        <a class="card-text" href="mailto:bhavika.patel8596@gmail.com">bhavika.patel8596@gmail.com</a>
+      </div>
+    </div>
+    <div class="card" style="border: none;">
+      <img class="card-img-top rounded-circle" src="https://media-exp1.licdn.com/dms/image/C5635AQFPhghoKbZHEA/profile-framedphoto-shrink_800_800/0/1618263546208?e=1619564400&v=beta&t=fr8RBQwM_itC2-E6zEdXfXhrnpZCGefO_mnn5VSA8wE" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Nilakanth Bajaniya</h5>
+        <a class="card-text" href="https://www.linkedin.com/in/nilkanth-bajaniya/">Full Stack Developer</a>
+        <a class="card-text" href="mailto:nilbajaniya@hotmail.com">nilbajaniya@hotmail.com</a>
+      </div>
+    </div>
+    <div class="card" style="border: none;">
+      <img class="card-img-top rounded-circle" src="https://media-exp1.licdn.com/dms/image/C5603AQF2YoblRm11hQ/profile-displayphoto-shrink_800_800/0/1616445974888?e=1625097600&v=beta&t=qNZmAu-GR4g-bWlBM2r0oQpoRUirDRQtzG4l88NtBAE" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Bhavya Patel</h5>
+        <a class="card-text" href="https://www.linkedin.com/in/bhavya-patel-2501/">Web Developer</a>
+        <a class="card-text" href="mailto:patelbhavya.cs@gmail.com">patelbhavya.cs@gmail.com</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+  <div class="container">
+    <div style="text-align: center;">
+      <h2 >Contact Us</h2>
+      </br>
+    </div>
+    <form>
+      <label for="fname">First Name</label>
+      <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+      <label for="lname">Last Name</label>
+      <input type="text" id="email" name="email" placeholder="Your Email address..">
+
+      <label for="subject">Comments</label>
+      <textarea id="subject" name="subject" placeholder="Write Comments on the project here..." style="height:200px"></textarea>
+
+      <input type="submit" class="btn btn-success text-center" value="Submit">
+    </form>
+  </div>
 <footer>
  <!-- Copyright -->
- <div class="text-center p-3" style="background-color: rgb(219, 219, 219); color: rgb(0, 0, 0)";>
-  © 2021 Copyright: Lethal Learners
+<div class="container">
+  <div class="text-center p-3" >
+    © 2021 Copyright: Lethal Learners
+  </div>
 </div>
 <!-- Copyright -->
 </footer>

@@ -7,65 +7,116 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
       </head>
-
+    <style>
+      body{
+        background-image: url("https://cutewallpaper.org/21/blurred-background-hd/4K-Plain-Blurred-Background-Best-HD-Wallpaper-40957-Baltana.jpg");
+        background-repeat: no-repeat;
+      }
+      .jumbotron{
+        font-family: 'Times New Roman', Times, serif;
+      }
+    </style>
 <body>
-
-
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="./">Mortality</a>
-          </div>
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="./">Home</a></li>
-          </ul>
-        </div>
-      </nav>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="./">Mortality</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="./">Home</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <div class="jumbotron">
+    <h1>Wanna know something Interesting?</h1>
+    <small>Enter your personal data</small>
     <form action="/predict_post" method="get">
-        Gender:
-        <select name="gender" id="gender">
-            <option value="1">Male</option>
-            <option value="2">Female</option>
-            <option value="9">Do not want share</option>
-        </select> <br />
-        
-        Age Group:
-        <select name="age_group" id="age_group">
-            <option value="1">0 to 19 Years</option>
-            <option value="2">20 to 29 Years</option>
-            <option value="3">30 to 39 Years</option>
-            <option value="4">40 to 49 Years</option>
-
-            <option value="5">50 to 59 Years</option>
-            <option value="6">60 to 69 Years</option>
-            <option value="7">70 to 79 Years</option>
-            <option value="8">80 Years or older</option>
-
-            <option value="9">Not Sure</option>
-        </select> <br />
-      	
-        Region: 
-        <select name="region" id="region">
-            <option value="1">Atlantic (New Brunswick, Nova Scotia, Prince Edward Island, Newfoundland and Labrador)</option>
-            <option value="2">Quebec</option>
-            <option value="3">Ontario and Nunavut</option>
-            <option value="4">Prairies (Alberta, Saskatchewan, and Manitoba) and the Northwest Territories</option>
-            <option value="5">British Columbia and Yukon</option>
-            <option value="0">Not Sure</option>
-        </select> <br />
-
-        Occupation:
-        <select name="occupation" id="occupation">
-            <option value="1">Health care worker</option>
-            <option value="2">School or daycare worker/attendee</option>
-            <option value="3">Long term care resident</option>
-            <option value="4">Other</option>
-            <option value="9">Not Sure</option>
-        </select>
-        <br />
-
-        <input type="submit" />
+    <h4>" If I am a <select name="gender" id="gender">
+      <option value="1">Male</option>
+      <option value="2">Female</option>
+      <option value="9">Do not want share</option>
+      </select>, And I belong within the age group of
+      <select name="age_group" id="age_group">
+        <option value="1">0 to 19 Years</option>
+        <option value="2">20 to 29 Years</option>
+        <option value="3">30 to 39 Years</option>
+        <option value="4">40 to 49 Years</option>
+        <option value="5">50 to 59 Years</option>
+        <option value="6">60 to 69 Years</option>
+        <option value="7">70 to 79 Years</option>
+        <option value="8">80 Years or older</option>
+        <option value="9">Not Sure</option>
+      </select>. Also, I reside in the region of
+      <select name="region" id="region">
+        <option value="1">Atlantic (New Brunswick, Nova Scotia, Prince Edward Island, Newfoundland and Labrador)</option>
+        <option value="2">Quebec</option>
+        <option value="3">Ontario and Nunavut</option>
+        <option value="4">Prairies (Alberta, Saskatchewan, and Manitoba) and the Northwest Territories</option>
+        <option value="5">British Columbia and Yukon</option>
+        <option value="0">Not Sure</option>
+      </select> and I am a
+      <select name="occupation" id="occupation">
+        <option value="1">Health care worker</option>
+        <option value="2">School or daycare worker/attendee</option>
+        <option value="3">Long term care resident</option>
+        <option value="4">Other</option>
+        <option value="9">Not Sure</option>
+      </select>". Then, how much would be my risk factor ? <br><br>Let's Calculate <input type="submit" />
+    </h4>
     </form>
+
+    <br>
+  </div>
+</div>
+    
+      <!-- Gender:
+      <select name="gender" id="gender">
+          <option value="1">Male</option>
+          <option value="2">Female</option>
+          <option value="9">Do not want share</option>
+      </select> <br />
+      
+      Age Group:
+      <select name="age_group" id="age_group">
+          <option value="1">0 to 19 Years</option>
+          <option value="2">20 to 29 Years</option>
+          <option value="3">30 to 39 Years</option>
+          <option value="4">40 to 49 Years</option>
+  
+          <option value="5">50 to 59 Years</option>
+          <option value="6">60 to 69 Years</option>
+          <option value="7">70 to 79 Years</option>
+          <option value="8">80 Years or older</option>
+  
+          <option value="9">Not Sure</option>
+      </select> <br />
+      
+      Region: 
+      <select name="region" id="region">
+          <option value="1">Atlantic (New Brunswick, Nova Scotia, Prince Edward Island, Newfoundland and Labrador)</option>
+          <option value="2">Quebec</option>
+          <option value="3">Ontario and Nunavut</option>
+          <option value="4">Prairies (Alberta, Saskatchewan, and Manitoba) and the Northwest Territories</option>
+          <option value="5">British Columbia and Yukon</option>
+          <option value="0">Not Sure</option>
+      </select> <br />
+  
+      Occupation:
+      <select name="occupation" id="occupation">
+          <option value="1">Health care worker</option>
+          <option value="2">School or daycare worker/attendee</option>
+          <option value="3">Long term care resident</option>
+          <option value="4">Other</option>
+          <option value="9">Not Sure</option>
+      </select>
+    <br /> -->
+  <!-- <input type="submit" />
+  </form> -->
+  
+
+
+
 </body>
 
 </html>
