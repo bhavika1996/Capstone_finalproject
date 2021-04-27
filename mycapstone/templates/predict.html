@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>File Upload</title>
+  <title> Predictions</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -54,20 +54,20 @@
         // body: JSON.stringify(body),
         success: function (result) {
 
-          $("#results").removeClass('badge-success');
-          $("#results").removeClass('badge-warning');
-          $("#results").removeClass('badge-primary');
+          $("#results").removeClass('btn-success');
+          $("#results").removeClass('btn-warning');
+          $("#results").removeClass('btn-primary');
 
           if (result.prediction === 2) {
 
-            $("#results").addClass('badge-success');
+            $("#results").addClass('btn-success');
           }
           else if (result.prediction === 1) {
 
-            $("#results").addClass('badge-danger');
+            $("#results").addClass('btn-danger');
           }
           else {
-            $("#results").addClass('badge-primary');
+            $("#results").addClass('btn-primary');
           }
 
           $("#results").html(result.msg);
@@ -133,7 +133,7 @@
             id="predictBtn" type="button" value="Let's Calculate" />
         </h4>
       </form>
-      <span class="badge badge-pill" id="results" style="display: none;"></span>
+      <span style="padding: 5px; font-size: medium;" disabled class="btn" id="results" style="display: none;"></span>
       <br>
     </div>
   </div>
