@@ -218,9 +218,13 @@ def uplaod_csv(request):
             }
             return render(request, "csv_upload_review.html", context)
         
-        data_set = io.StringIO(csv_file.read().decode('UTF-8'))
+        #data_set = io.StringIO(csv_file.read().decode('UTF-8'))
 
-        data = pd.read_csv(data_set,  delimiter=',')
+        #data = pd.read_csv(data_set,  delimiter=',', low_memory=False)
+
+        df = pd.concat((chunk for chunk in pd.read_csv(csv_file,  delimiter=',', chunksize=10**4)), ignore_index=True)
+
+        #data = pd.DataFrame(data).dropna()
 
         # msg = data["Death"].count()
         # df = pd.DataFrame(data)
