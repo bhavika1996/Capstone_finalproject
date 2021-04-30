@@ -191,11 +191,11 @@ def predict_post(request):
 
     msg = ''
     if(abs(int(prediction)) == 2):
-        msg = 'Risk factor for given demographics is less'
+        msg = 'Risk factor for given demographics is less.'
     elif(abs(int(prediction)) == 1):
-        msg = "Risk factor for given demographics is high"
+        msg = "Risk factor for given demographics is high."
     else:
-        msg = "No Pridictable data is available for given demographic"
+        msg = "No Pridictable data is available for given demographic."
 
     pred = abs(int(prediction))
     
