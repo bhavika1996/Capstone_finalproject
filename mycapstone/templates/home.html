@@ -1,5 +1,6 @@
 {% load static %}
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
 
@@ -60,7 +61,7 @@
 
 <body>
   <div id="title">
-    <h1>Mortality Information</h1>
+    <!-- <h1>Mortality Information</h1> -->
     <p>Based on COVID-19 Data</p>
     <!-- <div class="cointainer"> -->
     <img
@@ -69,10 +70,9 @@
   </div>
   <br>
   <br>
-  <div class="col-sm-6 offset-md-1">
-    <h2>Canadian COVID-19 Data Analysis</h2>
-    </br>
-  </div>
+
+  <!-- <h2 class="col-sm-6 offset-md-1">Canadian COVID-19 Data Analysis</h2> -->
+  </br>
   <!-- current cases data -->
   <div class="row">
     <div class="col-sm-1">
@@ -80,7 +80,7 @@
     <div class="col-sm-2">
       <div class="card text-white bg-info mb-4">
         <div class="card-body">
-          <h5 class="card-title">Total Cases</h5>
+          <p style="font-size: .83em; font-weight: bolder" class="card-title">Total Cases</p>
           <p class="card-text">{{current_cases}}</p>
         </div>
       </div>
@@ -88,7 +88,7 @@
     <div class="col-sm-2">
       <div class="card text-white bg-danger mb-4">
         <div class="card-body">
-          <h5 class="card-title">Total Death</h5>
+          <p style="font-size: .83em; font-weight: bolder" class="card-title">Total Death</p>
           <p class="card-text">{{fatalities}}</p>
         </div>
       </div>
@@ -96,7 +96,7 @@
     <div class="col-sm-2">
       <div class="card text-white bg-warning mb-4">
         <div class="card-body">
-          <h5 class="card-title">Hospitalized</h5>
+          <p style="font-size: .83em; font-weight: bolder" class="card-title">Hospitalized</p>
           <p class="card-text">{{hospitalized}}</p>
         </div>
       </div>
@@ -104,7 +104,7 @@
     <div class="col-sm-2">
       <div class="card text-white bg-success mb-4">
         <div class="card-body">
-          <h5 class="card-title">Recevored</h5>
+          <p style="font-size: .83em; font-weight: bolder" class="card-title">Recevored</p>
           <p class="card-text">{{recoveries}}</p>
         </div>
       </div>
@@ -112,7 +112,7 @@
     <div class="col-sm-2">
       <div class="card text-white bg-secondary mb-4">
         <div class="card-body">
-          <h5 class="card-title">Vaccinated</h5>
+          <p style="font-size: .83em; font-weight: bolder" class="card-title">Vaccinated</p>
           <p class="card-text">{{vaccinated}}</p>
         </div>
       </div>
@@ -184,10 +184,8 @@
   <!-- About Us-->
 
   <div class="container">
-    <div style="text-align: center;">
-      <h2>About Us</h2>
-      </br>
-    </div>
+  <p style="font-size: 1.5em; font-weight: bold; text-align: center;">About Us</p>
+  </br>
 
     <div class="card-deck text-center">
 
@@ -203,7 +201,8 @@
       </div>
       <div class="card" style="border: none;">
         <img class="card-img-top rounded-circle"
-          src="https://media-exp1.licdn.com/dms/image/C5103AQFeZkkVW6AK6g/profile-displayphoto-shrink_800_800/0/1523440598371?e=1625097600&v=beta&t=TddM2v5OjpG0pSnJjwzeaE33NqBQ0NSsS1tFa6iqEgc" alt="Nilakanth Bajaniya">
+          src="https://media-exp1.licdn.com/dms/image/C5103AQFeZkkVW6AK6g/profile-displayphoto-shrink_800_800/0/1523440598371?e=1625097600&v=beta&t=TddM2v5OjpG0pSnJjwzeaE33NqBQ0NSsS1tFa6iqEgc"
+          alt="Nilakanth Bajaniya">
         <div class="card-body">
           <h5 class="card-title">Nilakanth Bajaniya</h5>
           <a class="card-text" href="https://www.linkedin.com/in/nilkanth-bajaniya/">Full Stack Developer</a>
@@ -230,20 +229,21 @@
   <br>
   <br>
   <div class="container">
-    <div style="text-align: center;">
-      <h2>Contact Us</h2>
-      </br>
-    </div>
+    <p style="font-size: 1.5em; font-weight: bold; text-align: center;">Contact Us</p>
+    <br>
     <form>
-      <label for="fname">First Name</label>
-      <input type="text" Label="FirstName" id="fname" name="firstname" placeholder="Your name..">
+      <label for="firstname">First Name
+        <input type="text" id="firstname" name="firstname" placeholder="Your name..">
+      </label>
 
-      <label for="lname">Last Name</label>
-      <input type="text" Label="LastName" id="email" name="email" placeholder="Your Email address..">
+      <label for="lastname">Last Name
+        <input type="text" id="lastname" name="lastname" placeholder="Your Email address..">
+      </label>
 
-      <label for="subject">Comments</label>
-      <textarea id="subject" Label="Subject" name="subject" placeholder="Write Comments on the project here..."
-        style="height:200px"></textarea>
+      <label for="subject">Comments
+        <textarea id="subject" name="subject" placeholder="Write Comments on the project here..."
+          style="height:200px"></textarea>
+      </label>
 
       <input type="submit" class="btn btn-success text-center" value="Submit">
     </form>
