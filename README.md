@@ -16,7 +16,7 @@
 ##### run `python manage.py runserver` command
 ##### Above command will run the project on the local-server.
 ##### after successful execution of above command open this url `http://127.0.0.1:8000/` in the browser. 
-![Succesful execution output](https://github.com/bhavika1996/Capstone_finalproject/main/terminal.JPG?raw=true)
+![Succesful execution output](https://github.com/bhavika1996/Capstone_finalproject/blob/main/terminal.JPG?raw=true)
 
 
 
