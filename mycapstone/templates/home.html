@@ -1,41 +1,51 @@
 {% load static %}
 <html>
+
 <head>
 
-    <title>
-        Capstone
-    </title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
-    <!-- <link rel="stylesheet" type="text/css" href="{% static ''%}"> -->
-    <style>
-      a{
-        color: black;
-      }
-      #title{
-        background-color:black;
-        color: rgb(185, 184, 184);
-        text-align: center;
-      }
-      h2,footer{
-        color:#3ba5ad
-      }
-      .btn{
-        background-color: #3ba5ad;
-      }
-      .container{
-        color:#3ba5ad
-      }
-      .card-deck .card{
-        padding: 40px;
-        border: none;
-      }
-      input[type=text], select, textarea {
+  <title>
+    Capstone
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+  <!-- <link rel="stylesheet" type="text/css" href="{% static ''%}"> -->
+  <style>
+    a {
+      color: black;
+    }
+
+    #title {
+      background-color: black;
+      color: rgb(185, 184, 184);
+      text-align: center;
+    }
+
+    h2,
+    footer {
+      color: #3ba5ad
+    }
+
+    .btn {
+      background-color: #3ba5ad;
+    }
+
+    .container {
+      color: #3ba5ad
+    }
+
+    .card-deck .card {
+      padding: 40px;
+      border: none;
+    }
+
+    input[type=text],
+    select,
+    textarea {
       width: 100%;
       padding: 12px;
       border: 1px solid #ccc;
@@ -45,194 +55,210 @@
       margin-bottom: 16px;
       resize: vertical;
     }
-    </style>
+  </style>
 </head>
-<body >
-    <div id="title">
-        <h1>Mortality Information</h1>
-        <p>Based on COVID-19 Data</p>
-        <!-- <div class="cointainer"> -->
-        <img src="https://www.fredhutch.org/content/dam/www/homepage/formlette/2020-March/formlette-covid-19-desktop-3-2020.jpg" alt="Covid" style="width:100%">
-    </div>
-    <br>
-    <br>
-      <div class="col-sm-6 offset-md-1">
-          <h2>Canadian COVID-19 Data Analysis</h2>
-          </br>
-      </div>
-    <!-- current cases data -->
-    <div class="row">
-      <div class="col-sm-1">
-      </div>
-      <div class="col-sm-2">
-          <div class="card text-white bg-info mb-4">
-              <div class="card-body">
-                  <h5 class="card-title">Total Cases</h5>
-                  <p class="card-text">{{current_cases}}</p>
-              </div>
-          </div>
-      </div>
-      <div class="col-sm-2">
-          <div class="card text-white bg-danger mb-4" >
-              <div class="card-body">
-                  <h5 class="card-title">Total Death</h5>
-                  <p class="card-text">{{fatalities}}</p>
-              </div>
-          </div>
-      </div>
-      <div class="col-sm-2">
-          <div class="card text-white bg-warning mb-4">
-              <div class="card-body">
-                  <h5 class="card-title">Hospitalized</h5>
-                  <p class="card-text">{{hospitalized}}</p>
-              </div>
-          </div>
-      </div>
-      <div class="col-sm-2">
-        <div class="card text-white bg-success mb-4">
-            <div class="card-body">
-                <h5 class="card-title">Recevored</h5>
-                <p class="card-text">{{recoveries}}</p>
-            </div>
-        </div>
-      </div>
-      <div class="col-sm-2">
-        <div class="card text-white bg-secondary mb-4">
-            <div class="card-body">
-                <h5 class="card-title">Vaccinated</h5>
-                <p class="card-text">{{vaccinated}}</p>
-            </div>
-        </div>
-      </div>
-      <div class="col-sm-1">
-      </div>
-    </div>
 
-    </br>
-    <div class="container">
-          <div class="card border-info mb-3" >
-            <div class="row no-gutters">
-              <div class="col-md-4">
-                <img src="https://www.craigmarlatt.com/canada/images/images&downloads/map_pol.jpg"
-                  class="card-img-top"
-                  alt="..."
-                />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h4 class="card-title">Mortality in Canada</h4>
-                  <p class="card-text">Want to know the mortality in canada with various categories, represented by graphs. We used static dataset to represent mortality with various aspects. Some of the significant factors which can be determine to know the mortality rate of a human.</p>
-                  <p class="card-text"><small class="text-muted">All Representations are based on static dataset. Read more about the it.</small></p>
-                  <a href="upload" class="btn btn-info">Let's See</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card border-info mb-3" >
-            <div class="row no-gutters">
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h4 class="card-title">Download and Upload File</h4>
-                  <p class="card-text">Upload your own dataset in same representation. Also you can download the template for FREE. You would be able to get the visual outputs with the representation of GRAPHS.</p>
-                  <p class="card-text"><small class="text-muted">All Representations are based on static dataset. Read more about the it.</small></p>
-                  <a href="file" class="btn btn-info">Let's See</a>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <img src="https://safehomework.com/img/download.svg"
-                  class="card-img-top"
-                  alt="..."
-                />
-              </div>
-            </div>
-          </div>
-          <div class="card border-info mb-3" >
-            <div class="row no-gutters">
-              <div class="col-md-4">
-                <img src="https://piwik.pro/wp-content/uploads/2020/10/2020-10-21_What-Is-PII-non-PII-and-personal-data_blog.png"
-                  class="card-img-top"
-                  alt="..."
-                />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h4 class="card-title">Check Mortality with Personal Data</h4>
-                  <p class="card-text">You would be able to determine mortality by giving personal data.</p>
-                  <p class="card-text"><small class="text-muted">All Representations are based on static dataset. Read more about the it.</small></p>
-                  <a href="predict" class="btn btn-info">Let's See</a>
-                </div>
-              </div>
-          </div>
-        </div>
-      </div>
-    <br>
-
-
-<!-- About Us-->
-
-<div class="container">
-  <div style="text-align: center;">
-    <h2 >About Us</h2>
+<body>
+  <div id="title">
+    <h1>Mortality Information</h1>
+    <p>Based on COVID-19 Data</p>
+    <!-- <div class="cointainer"> -->
+    <img
+      src="https://www.fredhutch.org/content/dam/www/homepage/formlette/2020-March/formlette-covid-19-desktop-3-2020.jpg"
+      alt="Covid" style="width:100%">
+  </div>
+  <br>
+  <br>
+  <div class="col-sm-6 offset-md-1">
+    <h2>Canadian COVID-19 Data Analysis</h2>
     </br>
   </div>
-  <div class="card-deck text-center">
-    <div class="card">
-      <img class="card-img-top rounded-circle" src="https://media-exp1.licdn.com/dms/image/C4D03AQGlN0DpaRrhLA/profile-displayphoto-shrink_800_800/0/1611096723940?e=1625097600&v=beta&t=c_YT5gHlcacT_8GFFF90F9-bBOz0BYHFzZ168h-zyBI" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Bhavika Patel</h5>
-        <a class="card-text" href="https://www.linkedin.com/in/bhavika-patel85/">Web Designer</a>
-        <a class="card-text" href="mailto:bhavika.patel8596@gmail.com">bhavika.patel8596@gmail.com</a>
+  <!-- current cases data -->
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-2">
+      <div class="card text-white bg-info mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Total Cases</h5>
+          <p class="card-text">{{current_cases}}</p>
+        </div>
       </div>
     </div>
-    <div class="card" style="border: none;">
-      <img class="card-img-top rounded-circle" src="https://media-exp1.licdn.com/dms/image/C5103AQFeZkkVW6AK6g/profile-displayphoto-shrink_800_800/0/1523440598371?e=1625097600&v=beta&t=TddM2v5OjpG0pSnJjwzeaE33NqBQ0NSsS1tFa6iqEgc">
-      <div class="card-body">
-        <h5 class="card-title">Nilakanth Bajaniya</h5>
-        <a class="card-text" href="https://www.linkedin.com/in/nilkanth-bajaniya/">Full Stack Developer</a>
-        <a class="card-text" href="mailto:nilbajaniya@hotmail.com">nilbajaniya@hotmail.com</a>
+    <div class="col-sm-2">
+      <div class="card text-white bg-danger mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Total Death</h5>
+          <p class="card-text">{{fatalities}}</p>
+        </div>
       </div>
     </div>
-    <div class="card" style="border: none;">
-      <img class="card-img-top rounded-circle" src="https://media-exp1.licdn.com/dms/image/C5603AQF2YoblRm11hQ/profile-displayphoto-shrink_800_800/0/1616445974888?e=1625097600&v=beta&t=qNZmAu-GR4g-bWlBM2r0oQpoRUirDRQtzG4l88NtBAE" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Bhavya Patel</h5>
-        <a class="card-text" href="https://www.linkedin.com/in/bhavya-patel-2501/">Web Developer</a>
-        <a class="card-text" href="mailto:patelbhavya.cs@gmail.com">patelbhavya.cs@gmail.com</a>
+    <div class="col-sm-2">
+      <div class="card text-white bg-warning mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Hospitalized</h5>
+          <p class="card-text">{{hospitalized}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="card text-white bg-success mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Recevored</h5>
+          <p class="card-text">{{recoveries}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="card text-white bg-secondary mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Vaccinated</h5>
+          <p class="card-text">{{vaccinated}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
+
+  </br>
+  <div class="container">
+    <div class="card border-info mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img src="https://www.craigmarlatt.com/canada/images/images&downloads/map_pol.jpg" class="card-img-top"
+            alt="..." />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h4 class="card-title">Mortality in Canada</h4>
+            <p class="card-text">Want to know the mortality in canada with various categories, represented by graphs. We
+              used static dataset to represent mortality with various aspects. Some of the significant factors which can
+              be determine to know the mortality rate of a human.</p>
+            <p class="card-text"><small class="text-muted">All Representations are based on static dataset. Read more
+                about the it.</small></p>
+            <a href="upload" class="btn btn-info">Let's See</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card border-info mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-8">
+          <div class="card-body">
+            <h4 class="card-title">Download and Upload File</h4>
+            <p class="card-text">Upload your own dataset in same representation. Also you can download the template for
+              FREE. You would be able to get the visual outputs with the representation of GRAPHS.</p>
+            <p class="card-text"><small class="text-muted">All Representations are based on static dataset. Read more
+                about the it.</small></p>
+            <a href="file" class="btn btn-info">Let's See</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <img src="https://safehomework.com/img/download.svg" class="card-img-top" alt="..." />
+        </div>
+      </div>
+    </div>
+    <div class="card border-info mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img
+            src="https://piwik.pro/wp-content/uploads/2020/10/2020-10-21_What-Is-PII-non-PII-and-personal-data_blog.png"
+            class="card-img-top" alt="..." />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h4 class="card-title">Check Mortality with Personal Data</h4>
+            <p class="card-text">You would be able to determine mortality by giving personal data.</p>
+            <p class="card-text"><small class="text-muted">All Representations are based on static dataset. Read more
+                about the it.</small></p>
+            <a href="predict" class="btn btn-info">Let's See</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  <br>
 
-<br>
-<br>
+
+  <!-- About Us-->
+
   <div class="container">
     <div style="text-align: center;">
-      <h2 >Contact Us</h2>
+      <h2>About Us</h2>
+      </br>
+    </div>
+
+    <div class="card-deck text-center">
+
+      <div class="card">
+        <img class="card-img-top rounded-circle"
+          src="https://media-exp1.licdn.com/dms/image/C4D03AQGlN0DpaRrhLA/profile-displayphoto-shrink_800_800/0/1611096723940?e=1625097600&v=beta&t=c_YT5gHlcacT_8GFFF90F9-bBOz0BYHFzZ168h-zyBI"
+          alt="Bhavika Patel">
+        <div class="card-body">
+          <h5 class="card-title">Bhavika Patel</h5>
+          <a class="card-text" href="https://www.linkedin.com/in/bhavika-patel85/">Web Designer</a>
+          <a class="card-text" href="mailto:bhavika.patel8596@gmail.com">bhavika.patel8596@gmail.com</a>
+        </div>
+      </div>
+      <div class="card" style="border: none;">
+        <img class="card-img-top rounded-circle"
+          src="https://media-exp1.licdn.com/dms/image/C5103AQFeZkkVW6AK6g/profile-displayphoto-shrink_800_800/0/1523440598371?e=1625097600&v=beta&t=TddM2v5OjpG0pSnJjwzeaE33NqBQ0NSsS1tFa6iqEgc" alt="Nilakanth Bajaniya">
+        <div class="card-body">
+          <h5 class="card-title">Nilakanth Bajaniya</h5>
+          <a class="card-text" href="https://www.linkedin.com/in/nilkanth-bajaniya/">Full Stack Developer</a>
+          <a class="card-text" href="mailto:nilbajaniya@hotmail.com">nilbajaniya@hotmail.com</a>
+        </div>
+      </div>
+      <div class="card" style="border: none;">
+        <img class="card-img-top rounded-circle"
+          src="https://media-exp1.licdn.com/dms/image/C5603AQF2YoblRm11hQ/profile-displayphoto-shrink_800_800/0/1616445974888?e=1625097600&v=beta&t=qNZmAu-GR4g-bWlBM2r0oQpoRUirDRQtzG4l88NtBAE"
+          alt="Bhavya Patel">
+        <div class="card-body">
+          <h5 class="card-title">Bhavya Patel</h5>
+          <a class="card-text" href="https://www.linkedin.com/in/bhavya-patel-2501/">Software Developer</a>
+          <a class="card-text" href="mailto:patelbhavya.cs@gmail.com">patelbhavya.cs@gmail.com</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h5 class="text-center">Mentored By: <a href="mailto:azaman@conestogac.on.ca"> Dr. A.N.K Zaman </a></h5>
+
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <div class="container">
+    <div style="text-align: center;">
+      <h2>Contact Us</h2>
       </br>
     </div>
     <form>
       <label for="fname">First Name</label>
-      <input type="text" id="fname" name="firstname" placeholder="Your name..">
+      <input type="text" Label="FirstName" id="fname" name="firstname" placeholder="Your name..">
 
       <label for="lname">Last Name</label>
-      <input type="text" id="email" name="email" placeholder="Your Email address..">
+      <input type="text" Label="LastName" id="email" name="email" placeholder="Your Email address..">
 
       <label for="subject">Comments</label>
-      <textarea id="subject" name="subject" placeholder="Write Comments on the project here..." style="height:200px"></textarea>
+      <textarea id="subject" Label="Subject" name="subject" placeholder="Write Comments on the project here..."
+        style="height:200px"></textarea>
 
       <input type="submit" class="btn btn-success text-center" value="Submit">
     </form>
   </div>
-<footer>
- <!-- Copyright -->
-<div class="container">
-  <div class="text-center p-3" >
-    © 2021 Copyright: Lethal Learners
-  </div>
-</div>
-<!-- Copyright -->
-</footer>
-    
+  <footer>
+    <!-- Copyright -->
+    <div class="container">
+      <div class="text-center p-3">
+        © 2021 Copyright: Lethal Learners
+      </div>
+    </div>
+    <!-- Copyright -->
+  </footer>
+
 
 </body>
+
 </html>
